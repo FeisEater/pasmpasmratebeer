@@ -1,4 +1,4 @@
 # pasmpasmratebeer
 Ruby on rails kurssin ratebeer
 
-ps: rb-readline on perseestä
+heroku linkki: https://pasmpasmratebeer.herokuapp.com/breweries
