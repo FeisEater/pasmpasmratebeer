@@ -1,0 +1,56 @@
+irb(main):001:0> brewdog = Brewery.create name:"BrewDog", year:2007
+   (0.3ms)  SAVEPOINT active_record_1
+  SQL (1.3ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2015-01-19 14:42:07.230543"], ["updated_at", "2015-01-19 14:42:07.230543"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Brewery id: 6, name: "BrewDog", year: 2007, created_at: "2015-01-19 14:42:07", updated_at: "2015-01-19 14:42:07">
+
+irb(main):002:0> brewdog.beers.create name:"Punk IPA", style:"IPA"
+   (0.3ms)  SAVEPOINT active_record_1
+  SQL (25.2ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 6], ["created_at", "2015-01-19 14:45:24.077234"], ["updated_at", "2015-01-19 14:45:24.077234"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Beer id: 13, name: "Punk IPA", style: "IPA", brewery_id: 6, created_at: "2015-01-19 14:45:24", updated_at: "2015-01-19 14:45:24">
+
+irb(main):003:0> brewdog.beers.create name:"Nanny State", style:"lowalcohol"
+   (0.9ms)  SAVEPOINT active_record_1
+  SQL (0.5ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 6], ["created_at", "2015-01-19 14:46:21.630202"], ["updated_at", "2015-01-19 14:46:21.630202"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Beer id: 14, name: "Nanny State", style: "lowalcohol", brewery_id: 6, created_at: "2015-01-19 14:46:21", updated_at: "2015-01-19 14:46:21">
+
+irb(main):013:0> ipa = brewdog.beers.find_by style:"IPA"
+  Beer Load (0.9ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."brewery_id" = ? AND "beers"."style" = ? LIMIT 1  [["brewery_id", 6], ["style", "IPA"]]
+=> #<Beer id: 13, name: "Punk IPA", style: "IPA", brewery_id: 6, created_at: "2015-01-19 14:45:24", updated_at: "2015-01-19 14:45:24">
+
+irb(main):014:0> ipa.ratings.create score:10
+   (0.3ms)  SAVEPOINT active_record_1
+  SQL (0.9ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 10], ["beer_id", 13], ["created_at", "2015-01-19 14:54:06.084906"], ["updated_at", "2015-01-19 14:54:06.084906"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Rating id: 4, score: 10, beer_id: 13, created_at: "2015-01-19 14:54:06", updated_at: "2015-01-19 14:54:06">
+
+irb(main):015:0> ipa.ratings.create score:20
+   (0.7ms)  SAVEPOINT active_record_1
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 20], ["beer_id", 13], ["created_at", "2015-01-19 14:54:09.955133"], ["updated_at", "2015-01-19 14:54:09.955133"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Rating id: 5, score: 20, beer_id: 13, created_at: "2015-01-19 14:54:09", updated_at: "2015-01-19 14:54:09">
+
+irb(main):016:0> ipa.ratings.create score:17
+   (0.4ms)  SAVEPOINT active_record_1
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 17], ["beer_id", 13], ["created_at", "2015-01-19 14:54:14.858584"], ["updated_at", "2015-01-19 14:54:14.858584"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Rating id: 6, score: 17, beer_id: 13, created_at: "2015-01-19 14:54:14", updated_at: "2015-01-19 14:54:14">
+
+irb(main):017:0> lowalco = brewdog.beers.find_by style:"lowalcohol"
+  Beer Load (0.6ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."brewery_id" = ? AND "beers"."style" = ? LIMIT 1  [["brewery_id", 6], ["style", "lowalcohol"]]
+=> #<Beer id: 14, name: "Nanny State", style: "lowalcohol", brewery_id: 6, created_at: "2015-01-19 14:46:21", updated_at: "2015-01-19 14:46:21">
+
+irb(main):020:0> lowalco.ratings.create score:1
+   (0.4ms)  SAVEPOINT active_record_1
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 1], ["beer_id", 14], ["created_at", "2015-01-19 14:57:23.402238"], ["updated_at", "2015-01-19 14:57:23.402238"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Rating id: 7, score: 1, beer_id: 14, created_at: "2015-01-19 14:57:23", updated_at: "2015-01-19 14:57:23">
+
+irb(main):021:0> lowalco.ratings.create score:-10
+   (0.5ms)  SAVEPOINT active_record_1
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", -10], ["beer_id", 14], ["created_at", "2015-01-19 14:57:33.202798"], ["updated_at", "2015-01-19 14:57:33.202798"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Rating id: 8, score: -10, beer_id: 14, created_at: "2015-01-19 14:57:33", updated_at: "2015-01-19 14:57:33">
+

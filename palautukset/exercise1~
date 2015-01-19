@@ -1,0 +1,18 @@
+irb(main):001:0> brewdog = Brewery.create name:"BrewDog", year:2007
+   (0.3ms)  SAVEPOINT active_record_1
+  SQL (1.3ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2015-01-19 14:42:07.230543"], ["updated_at", "2015-01-19 14:42:07.230543"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Brewery id: 6, name: "BrewDog", year: 2007, created_at: "2015-01-19 14:42:07", updated_at: "2015-01-19 14:42:07">
+
+irb(main):002:0> brewdog.beers.create name:"Punk IPA", style:"IPA"
+   (0.3ms)  SAVEPOINT active_record_1
+  SQL (25.2ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 6], ["created_at", "2015-01-19 14:45:24.077234"], ["updated_at", "2015-01-19 14:45:24.077234"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Beer id: 13, name: "Punk IPA", style: "IPA", brewery_id: 6, created_at: "2015-01-19 14:45:24", updated_at: "2015-01-19 14:45:24">
+
+irb(main):003:0> brewdog.beers.create name:"Nanny State", style:"lowalcohol"
+   (0.9ms)  SAVEPOINT active_record_1
+  SQL (0.5ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 6], ["created_at", "2015-01-19 14:46:21.630202"], ["updated_at", "2015-01-19 14:46:21.630202"]]
+   (0.3ms)  RELEASE SAVEPOINT active_record_1
+=> #<Beer id: 14, name: "Nanny State", style: "lowalcohol", brewery_id: 6, created_at: "2015-01-19 14:46:21", updated_at: "2015-01-19 14:46:21">
+
