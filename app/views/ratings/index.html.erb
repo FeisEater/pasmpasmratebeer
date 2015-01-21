@@ -4,21 +4,13 @@
 
 <p> Number of ratings: <%= @ratings.count %> </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Score</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<ul>
     <% @ratings.each do |rating| %>
-      <tr>
+      <li>
         <td><%= rating %></td>
-      </tr>
+      </li>
     <% end %>
-  </tbody>
-</table>
+</ul>
 
 <br>
 
