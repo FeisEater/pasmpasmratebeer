@@ -6,11 +6,12 @@
 
 <ul>
     <% @ratings.each do |rating| %>
-      <li>
-        <td><%= rating %></td>
-      </li>
+      <% byebug if rating.beer.nil? %>
+      <li> <%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'U w0t m8?' } %> </li>
     <% end %>
 </ul>
 
 <br>
+
+<%= link_to 'New Rating', new_rating_path %>
 

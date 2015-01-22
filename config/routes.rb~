@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :breweries
 
-  resources :ratings, only: [:index, :new, :create, :destroy]
+  resources :ratings, only: [:index, :new, :create]
 
   root 'breweries#index'
   get 'kaikki_bisset', to: 'beers#index'

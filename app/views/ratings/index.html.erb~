@@ -4,21 +4,12 @@
 
 <p> Number of ratings: <%= @ratings.count %> </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Score</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<ul>
     <% @ratings.each do |rating| %>
-      <tr>
-        <td><%= rating %></td>
-      </tr>
+      <% byebug if rating.beer.is_nil? %>
+      <li> <%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'U w0t m8?' } %> </li>
     <% end %>
-  </tbody>
-</table>
+</ul>
 
 <br>
 
