@@ -6,7 +6,7 @@
 
 <ul>
     <% @ratings.each do |rating| %>
-      <% byebug if rating.beer.is_nil? %>
+      <% byebug if rating.beer.nil? %>
       <li> <%= rating %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'U w0t m8?' } %> </li>
     <% end %>
 </ul>
