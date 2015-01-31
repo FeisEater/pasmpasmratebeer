@@ -16,16 +16,11 @@
       <%= f.label :username %><br>
       <%= f.text_field :username %>
     </div>
-    <div class="field">
-      <%= f.label :password %><br>
-      <%= f.password_field :password %>
-    </div>
-  <% else %>
-    <div class="field">
-      <%= f.label 'New password' %><br>
-      <%= f.password_field :password %>
-    </div>
   <% end %>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
   <div class="field">
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>

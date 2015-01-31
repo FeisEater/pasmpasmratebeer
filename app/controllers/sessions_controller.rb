@@ -6,13 +6,13 @@ class SessionsController < ApplicationController
   def create
     # haetaan usernamea vastaava käyttäjä tietokannasta
     user = User.find_by username: params[:username]
-    if user.nil?
-      redirect_to :back, notice: "User #{params[:username]} does not exist! Dummy!"
-    else
+    if user && user.authenticate(params[:password])
       # talletetaan sessioon kirjautuneen käyttäjän id (jos käyttäjä on olemassa)
-      session[:user_id] = user.id unless user.nil?
+      session[:user_id] = user.id
       # uudelleen ohjataan käyttäjä omalle sivulleen
       redirect_to user, notice: "Welcome back!"
+    else
+      redirect_to :back, notice: "User #{params[:username]} does not exist! Dummy!"
     end
   end
 

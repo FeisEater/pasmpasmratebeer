@@ -22,7 +22,7 @@ class BeerClubsController < ApplicationController
       @beer_club.members << current_user
       redirect_to @beer_club
     else
-      redirect_to beer_clubs_path, notice: "Already in the club"
+      redirect_to beer_clubs_path, notice: "Login to join the club"
     end
   end
 
