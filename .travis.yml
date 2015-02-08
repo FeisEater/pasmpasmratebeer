@@ -1,10 +1,15 @@
 language: ruby
-
 rvm:
- - 2.1.5
-
+- 2.1.5
 script:
- - bundle exec rake db:migrate --trace
- - RAILS_ENV=test bundle exec rake db:migrate --trace
- - bundle exec rake db:test:prepare
- - bundle exec rspec -fd spec/
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: oh57B5w2GC+4qih1Z/X7uOqDgayO84ElIw11eSRXAy8/kmcQU5QnpNsU/5ykD6j3ZzxnTSETLqOjeIEGr6dGEzL3Lh1W4wCgjqnd+m2htkbssv3AaZuWkdaOIVR5YH4wTydHhkUUdJ+FYfm1Gsimrl8AagAIjiO51KBVJV4pbF8=
+  app: pasmpasmratebeer
+  on:
+    repo: FeisEater/pasmpasmratebeer

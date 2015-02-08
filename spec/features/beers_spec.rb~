@@ -16,7 +16,7 @@ describe "Beers page" do
     click_link "New Beer"
     fill_in('beer[name]', with:'')
     click_button "Create Beer"
-    save_and_open_page
-    expect(current_path).to eq(new_beer_path)
+    expect(page).to have_content 'New Beer'
+    expect(page).to have_content "Name can't be blank"
   end
 end
