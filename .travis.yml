@@ -13,3 +13,6 @@ deploy:
   app: pasmpasmratebeer
   on:
     repo: FeisEater/pasmpasmratebeer
+addons:
+  code_climate:
+    repo_token 85fc6b5b
