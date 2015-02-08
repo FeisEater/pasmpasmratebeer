@@ -15,6 +15,18 @@
   Has made <%= @user.ratings.count %> ratings, average: <%= @user.average_rating %>
 </p>
 
+<% if @user.favorite_style %>
+  <p>
+    <%= @user.favorite_style %> is his favorite style
+  </p>
+<% end %>
+
+<% if @user.favorite_brewery %>
+  <p>
+    <%= @user.favorite_brewery %> is his favorite brewery
+  </p>
+<% end %>
+
 <ul>
     <% @user.ratings.each do |rating| %>
       <% byebug if rating.beer.nil? %>
@@ -29,7 +41,9 @@
 
 <br>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-|
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
+  |
+<% end %>
 <%= link_to 'Back', users_path %>

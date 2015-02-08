@@ -41,4 +41,120 @@ RSpec.describe User, :type => :model do
       expect(user.average_rating).to eq(15.0)
     end
   end
+  
+  describe "favorite beer" do
+    let(:user){FactoryGirl.create(:user)}
+    it "has method for determining the favorite_beer" do
+      expect(user).to respond_to(:favorite_beer)
+    end
+    
+    it "without ratings does not have a favorite beer" do
+      expect(user.favorite_beer).to eq(nil)    
+    end
+
+    it "is the only rated if only one rating" do
+      beer = FactoryGirl.create(:beer)
+      rating = FactoryGirl.create(:rating, beer:beer, user:user)
+      
+      expect(user.favorite_beer).to eq(beer)
+    end
+    
+    it "is the one with highest rating if several rated" do
+      create_beers_with_ratings(10, 20, 15, 7, 9, user)
+      best = create_beer_with_rating(25, user)
+      
+      expect(user.favorite_beer).to eq(best)
+    end
+    
+  end
+  
+  describe "favorite style" do
+    let(:user){FactoryGirl.create(:user)}
+    
+    it "has method for determining the favorite_style" do
+      expect(user).to respond_to(:favorite_style)
+    end
+    
+    it "without ratings does not have favorite_style" do
+      expect(user.favorite_style).to eq(nil)
+    end
+
+    it "with one rating, that beer has the favorite style" do
+      create_beer_with_style_and_rating(10, "Lager", user)
+      expect(user.favorite_style).to eq("Lager")
+    end
+    
+    it "is the one with best average rating" do
+      create_beer_with_style_and_rating(1, "Lager", user)
+      create_beer_with_style_and_rating(1, "Lager", user)
+      create_beer_with_style_and_rating(1, "Lager", user)
+      create_beer_with_style_and_rating(10, "Weizen", user)
+      create_beer_with_style_and_rating(1, "Weizen", user)
+      create_beer_with_style_and_rating(1, "Weizen", user)
+      create_beer_with_style_and_rating(5, "Porter", user)
+      create_beer_with_style_and_rating(5, "Porter", user)
+      create_beer_with_style_and_rating(5, "Porter", user)
+      
+      expect(user.favorite_style).to eq("Porter")
+    end
+
+  end
+
+  describe "favorite brewery" do
+    let(:user){FactoryGirl.create(:user)}
+    
+    it "has method for determining the favorite_brewery" do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+    
+    it "without ratings does not have favorite_brewery" do
+      expect(user.favorite_brewery).to eq(nil)
+    end
+
+    it "with one rating, that beer's brewery is favorite" do
+      brewery = FactoryGirl.create(:brewery)
+      create_beer_with_rating_and_place_to_brewery(10, brewery, user)
+      expect(user.favorite_brewery).to eq(brewery)
+    end
+    
+    it "is the one with best average rating" do
+      brew1 = FactoryGirl.create(:brewery)
+      brew2 = FactoryGirl.create(:brewery)
+      brew3 = FactoryGirl.create(:brewery)
+      create_beer_with_rating_and_place_to_brewery(1, brew1, user)
+      create_beer_with_rating_and_place_to_brewery(1, brew1, user)
+      create_beer_with_rating_and_place_to_brewery(1, brew1, user)
+      create_beer_with_rating_and_place_to_brewery(10, brew2, user)
+      create_beer_with_rating_and_place_to_brewery(1, brew2, user)
+      create_beer_with_rating_and_place_to_brewery(1, brew2, user)
+      create_beer_with_rating_and_place_to_brewery(5, brew3, user)
+      create_beer_with_rating_and_place_to_brewery(5, brew3, user)
+      create_beer_with_rating_and_place_to_brewery(5, brew3, user)
+      
+      expect(user.favorite_brewery).to eq(brew3)
+    end
+
+  end
+
+end
+
+def create_beer_with_rating(score, user)
+  create_beer_with_style_and_rating(score, "Lager", user)
+end
+
+def create_beers_with_ratings(*scores, user)
+  scores.each do |score|
+    create_beer_with_rating(score, user)
+  end
+end
+
+def create_beer_with_style_and_rating(score, style, user)
+  beer = FactoryGirl.create(:beer, style:style)
+  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+  beer
+end
+
+def create_beer_with_rating_and_place_to_brewery(score, brewery, user)
+  beer = create_beer_with_rating(score, user)
+  brewery.beers << beer
 end
