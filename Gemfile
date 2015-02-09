@@ -27,6 +27,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'rb-readline'
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'httparty'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
