@@ -20,12 +20,12 @@ describe "Breweries page" do
     end
 
 #Tää ei vittu toimi
-    #it "lists the breweries and their total number" do
-    #  expect(page).to have_content "Number of breweries: #{@breweries.count}"
-    #  @breweries.each do |brewery_name|
-    #    expect(page).to have_content brewery_name
-    #  end
-    #end
+    it "lists the breweries and their total number" do
+      expect(page).to have_content "Number of breweries: #{@breweries.count}"
+      @breweries.each do |brewery_name|
+        expect(page).to have_content brewery_name
+      end
+    end
 
     it "allows user to navigate to page of a Brewery" do
       click_link "Koff"
