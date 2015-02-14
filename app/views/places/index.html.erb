@@ -8,7 +8,14 @@
 <% end %>
 
 <% if @places %>
-  <table>
+  <ul>
+    <% @places.each do |place| %>
+      <li>
+        <%= link_to place.name, place_path(place.id) %>
+      </li>
+    <% end %>
+  </ul>
+  <!--table>
     <thead>
       <% Place.rendered_fields.each do |f| %>
         <td><%=f %></td>
@@ -21,5 +28,5 @@
         <% end %>
       </tr>
     <% end %>
-  </table>
+  </table--!>
 <% end %>

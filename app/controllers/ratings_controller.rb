@@ -15,7 +15,7 @@ class RatingsController < ApplicationController
       redirect_to signin_path, notice:'you should be signed in'
     elsif @rating.save
       current_user.ratings << @rating
-      redirect_to current_user
+      redirect_to @rating.beer
     else
       @beers = Beer.all
       render :new

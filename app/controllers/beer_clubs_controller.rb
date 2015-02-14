@@ -1,5 +1,5 @@
 class BeerClubsController < ApplicationController
-  before_action :set_beer_club, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_beer_club, only: [:show, :edit, :update, :destroy, :join, :quit]
   before_action :ensure_that_signed_in, except: [:index, :show]
 
   # GET /beer_clubs
@@ -21,9 +21,18 @@ class BeerClubsController < ApplicationController
   def join
     if not @beer_club.members.include? current_user
       @beer_club.members << current_user
-      redirect_to @beer_club
+      redirect_to @beer_club, notice: "#{current_user.username}, welcome to the club!"
     else
       redirect_to beer_clubs_path, notice: "Already in the club"
+    end
+  end
+  
+  def quit
+    if @beer_club.members.include? current_user
+      @beer_club.members.destroy current_user
+      redirect_to current_user
+    else
+      redirect_to beer_clubs_path, notice: "Can't quit club if wasn't in it"
     end
   end
 

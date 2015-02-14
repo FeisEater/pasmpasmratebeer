@@ -22,5 +22,14 @@
   <% end %>
 </ul>
 
+<% if current_user && @beer_club.members.include?(current_user) %>
+  <%= button_to('end the membership', quit_club_path(@beer_club), method: :delete) %>
+<% end %>
+
+</br>
+
+<% if current_user && !@beer_club.members.include?(current_user) %>
+  <%= link_to('Join', join_club_path(@beer_club), method: :post) %> |
+<% end %>
 <%= link_to('Edit', edit_beer_club_path(@beer_club)) if current_user %> |
 <%= link_to 'Back', beer_clubs_path %>

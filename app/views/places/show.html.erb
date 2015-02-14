@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<% if @place  %>
+  <h1><%= @place.name %></h1>
+  
+  <p><%= @place.street %></p>
+
+  <p><%= "#{@place.zip} #{@place.city}" %></p>
+  
+  <iframe
+    width="600"
+    height="480"
+    frameborder="0" style="border:0"
+    src=<%= @place.blogmap %> >
+  </iframe>
+  
+<% else %>
+  <h1>Place couldn't be shown</h1>
+<% end %>
+

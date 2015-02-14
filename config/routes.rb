@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :ratings, only: [:index, :new, :create, :destroy]
 
   resource :session, only: [:new, :create, :delete]
+  
+  resources :places, only:[:index, :show]
 
   root 'breweries#index'
   get 'kaikki_bisset', to: 'beers#index'
@@ -17,8 +19,8 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   post 'join_club/:id', to: 'beer_clubs#join', as: :join_club
+  delete 'quit_club/:id', to: 'beer_clubs#quit', as: :quit_club
 
-  get 'places', to: 'places#index'
   post 'places', to:'places#search'
 
   # The priority is based upon order of creation: first created -> highest priority.
