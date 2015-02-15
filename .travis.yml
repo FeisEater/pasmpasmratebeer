@@ -13,4 +13,6 @@ deploy:
   app: pasmpasmratebeer
   on:
     repo: FeisEater/pasmpasmratebeer
-
+env:
+  global:
+    secure: Krqxr6wIjez1gtOMQwBYbmwppOTC7WeNruTEGXkWuN5h58yc7hxAzMK67+2cTyC+bw1JhwFHZKmcpUkIFAVtXGB/bwT6HJ/yoHvVagNk1EDMhmCEge/WxNScNK+kR3yU13eb55SybXwIxIxEfSYYRKUkA6BPMe02+QWD+84J2+E=
