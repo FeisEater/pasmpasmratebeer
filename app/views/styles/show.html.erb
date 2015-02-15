@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= @style.name %></strong>
+</p>
+
+<p>
+  <%= @style.description %>
+</p>
+
+<p>
+  <strong>Beers</strong>
+  <ul>
+    <% @style.beers.each do |beer| %>
+      <li><%= "#{beer.name} by #{beer.brewery.name}" %></li>
+    <% end %>
+  </ul>
+</p>

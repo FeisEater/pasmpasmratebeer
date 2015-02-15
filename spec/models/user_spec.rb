@@ -80,22 +80,26 @@ RSpec.describe User, :type => :model do
     end
 
     it "with one rating, that beer has the favorite style" do
-      create_beer_with_style_and_rating(10, "Lager", user)
-      expect(user.favorite_style).to eq("Lager")
+      style = FactoryGirl.create(:style)
+      create_beer_with_style_and_rating(10, style, user)
+      expect(user.favorite_style).to eq(style)
     end
     
     it "is the one with best average rating" do
-      create_beer_with_style_and_rating(1, "Lager", user)
-      create_beer_with_style_and_rating(1, "Lager", user)
-      create_beer_with_style_and_rating(1, "Lager", user)
-      create_beer_with_style_and_rating(10, "Weizen", user)
-      create_beer_with_style_and_rating(1, "Weizen", user)
-      create_beer_with_style_and_rating(1, "Weizen", user)
-      create_beer_with_style_and_rating(5, "Porter", user)
-      create_beer_with_style_and_rating(5, "Porter", user)
-      create_beer_with_style_and_rating(5, "Porter", user)
+      style1 = FactoryGirl.create(:style)
+      style2 = FactoryGirl.create(:style)
+      style3 = FactoryGirl.create(:style)
+      create_beer_with_style_and_rating(1, style1, user)
+      create_beer_with_style_and_rating(1, style1, user)
+      create_beer_with_style_and_rating(1, style1, user)
+      create_beer_with_style_and_rating(10, style2, user)
+      create_beer_with_style_and_rating(1, style2, user)
+      create_beer_with_style_and_rating(1, style2, user)
+      create_beer_with_style_and_rating(5, style3, user)
+      create_beer_with_style_and_rating(5, style3, user)
+      create_beer_with_style_and_rating(5, style3, user)
       
-      expect(user.favorite_style).to eq("Porter")
+      expect(user.favorite_style).to eq(style3)
     end
 
   end
@@ -139,7 +143,8 @@ RSpec.describe User, :type => :model do
 end
 
 def create_beer_with_rating(score, user)
-  create_beer_with_style_and_rating(score, "Lager", user)
+  style = FactoryGirl.create(:style)
+  create_beer_with_style_and_rating(score, style, user)
 end
 
 def create_beers_with_ratings(*scores, user)

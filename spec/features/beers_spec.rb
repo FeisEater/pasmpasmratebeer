@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "Beers page" do
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:user) { FactoryGirl.create :user }
+  let!(:style) { FactoryGirl.create :style }
   
   before :each do
     sign_in(username:"Pekka1", password:"Foobar1")

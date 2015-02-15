@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :delete]
   
   resources :places, only:[:index, :show]
+  
+  resources :styles, only: [:index, :show]
 
   root 'breweries#index'
   get 'kaikki_bisset', to: 'beers#index'

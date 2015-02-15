@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   post 'join_club/:id', to: 'beer_clubs#join', as: :join_club
+  delete 'quit_club/:id', to: 'beer_clubs#quit', as: :quit_club
 
   post 'places', to:'places#search'
 
