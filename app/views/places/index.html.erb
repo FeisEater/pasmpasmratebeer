@@ -7,10 +7,12 @@
   <%= submit_tag "Search" %>
 <% end %>
 
+</br>
+
 <% if @places %>
-  <ul>
+  <ul class="list-group">
     <% @places.each do |place| %>
-      <li>
+      <li class="list-group-item">
         <%= link_to place.name, place_path(place.id) %>
       </li>
     <% end %>

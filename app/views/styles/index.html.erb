@@ -2,8 +2,8 @@
 
 <h1>Listing beer styles</h1>
 
-<ul>
+<ul class="list-group">
   <% @styles.each do |style| %>
-    <li><%= link_to style.name, style %></li>
+    <li class="list-group-item"><%= link_to style.name, style %></li>
   <% end %>
 </ul>

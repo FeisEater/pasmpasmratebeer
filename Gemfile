@@ -28,6 +28,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'rb-readline'
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'httparty'
+gem 'bootstrap-sass'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -69,4 +70,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter'
   gem 'webmock'
+end
+
+group :development do
+  gem 'rails_layout'
 end
