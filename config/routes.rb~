@@ -5,13 +5,17 @@ Rails.application.routes.draw do
 
   resources :beers
 
-  resources :breweries
+  resources :breweries do
+    post 'toggle_activity', on :member
+  end
 
   resources :ratings, only: [:index, :new, :create, :destroy]
 
   resource :session, only: [:new, :create, :delete]
   
   resources :places, only:[:index, :show]
+  
+  resources :styles, only: [:index, :show]
 
   root 'breweries#index'
   get 'kaikki_bisset', to: 'beers#index'

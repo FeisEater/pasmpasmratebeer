@@ -3,6 +3,9 @@
 <h2>
   <strong>Name:</strong>
   <%= @brewery.name %>
+  <% if not @brewery.active %>
+    <span class="label label-info">retired</span>
+  <% end %>
 </h2>
 
 <p>
@@ -16,7 +19,7 @@
 
 <p>
  <% @brewery.beers.each do |beer| %>
-   <%= link_to beer.name, beer %>
+   <%= link_to beer.name, beer, class: "btn btn-default btn-xs" %>
  <% end %>
 </p>
 
@@ -29,5 +32,4 @@
 </p>
 
 
-<%= link_to('Edit', edit_brewery_path(@brewery)) if current_user %> |
-<%= link_to 'Back', breweries_path %>
+<%= edit_and_destroy_buttons(@brewery) %>

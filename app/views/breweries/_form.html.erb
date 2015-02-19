@@ -13,13 +13,17 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :year %><br>
-    <%= f.number_field :year %>
+    <%= f.number_field :year, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

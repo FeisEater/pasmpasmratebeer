@@ -28,10 +28,12 @@
   
   <%= form_for(@rating) do |f| %>
     <%= f.hidden_field :beer_id %>
-    score: <%= f.number_field :score %>
+    score: <%= f.number_field :score, class: "" %>
     <%= f.submit class:"btn btn-primary" %>
   <% end %>
   
-  <%= link_to('Edit', edit_beer_path(@beer), class:"btn btn-primary") if current_user %>
+  </br>
+  
+  <%= edit_and_destroy_buttons(@beer) %>
 
 <% end %>

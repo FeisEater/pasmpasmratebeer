@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% breweries.each do |brewery| %>
+      <tr>
+        <td><%= link_to brewery.name, brewery %></td>
+        <td><%= brewery.year %></td>
+        <!--td><%= link_to 'Show', brewery %></td--!>
+        <td><%= link_to('Edit', edit_brewery_path(brewery), class: "btn btn-default") if current_user %></td>
+        <td><%= link_to('Destroy', brewery, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' }) if current_user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

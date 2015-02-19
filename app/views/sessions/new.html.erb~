@@ -3,6 +3,7 @@
 <h1>Sign in</h1>
 
 <%= form_tag session_path do %>
-  <%= text_field_tag :username, params[:username] %>
-  <%= submit_tag "Log in" %>
+  username <%= text_field_tag :username, params[:username], class: "form-control" %>
+  password <%= password_field_tag :password, params[:password], class: "form-control" %>
+  <%= submit_tag "Log in", class: "btn btn-primary" %>
 <% end %>

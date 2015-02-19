@@ -10,9 +10,11 @@
 
 <p>
   <strong>Beers</strong>
-  <ul>
+  <ul class="list-group">
     <% @style.beers.each do |beer| %>
-      <li><%= "#{beer.name} by #{beer.brewery.name}" %></li>
+      <li class="list-group-item"><%= "#{beer.name} by #{beer.brewery.name}" %></li>
     <% end %>
   </ul>
 </p>
+
+<!--%= edit_and_destroy_buttons(@style) %--!>

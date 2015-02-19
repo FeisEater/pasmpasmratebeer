@@ -23,17 +23,17 @@
 
 <% if @user.favorite_brewery %>
   <p>
-    <%= @user.favorite_brewery %> is his favorite brewery
+    <%= @user.favorite_brewery.name %> is his favorite brewery
   </p>
 <% end %>
 
-<ul>
+<ul class="list-group">
     <% @user.ratings.each do |rating| %>
       <% byebug if rating.beer.nil? %>
-      <li>
+      <li class="list-group-item">
         <%= rating %>
         <% if @user == current_user %>
-          <%= link_to 'delete', rating, method: :delete, data: { confirm: 'U w0t m8?' } %>
+          <%= link_to 'delete', rating, class: "btn btn-danger btn-xs", method: :delete, data: { confirm: 'U w0t m8?' } %>
         <% end %>
       </li>
     <% end %>
@@ -42,8 +42,7 @@
 <br>
 
 <% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
-  |
+  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-default" %>
+  <%= link_to 'Destroy', @user, class: "btn btn-danger",method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-<%= link_to 'Back', users_path %>
+

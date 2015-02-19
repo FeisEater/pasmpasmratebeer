@@ -25,21 +25,21 @@ describe "Rating" do
     expect(beer1.average_rating).to eq(15.0)
   end
   
-  it "shows 0 when no ratings" do
-    visit ratings_path
-    expect(page).to have_content 'Number of ratings: 0'
-  end
+  #it "shows 0 when no ratings" do
+  #  visit ratings_path
+  #  expect(page).to have_content 'Number of ratings: 0'
+  #end
   
-  it "shows amount of ratings" do
-    make_rating beer1, '10'
-    make_rating beer2, '15'
-    make_rating beer1, '20'
-    visit ratings_path
-    expect(page).to have_content 'Number of ratings: 3'
-    expect(page).to have_content 'iso 3 10 Pekka1'
-    expect(page).to have_content 'Karhu 15 Pekka1'
-    expect(page).to have_content 'iso 3 20 Pekka1'
-  end
+  #it "shows amount of ratings" do
+  #  make_rating beer1, '10'
+  #  make_rating beer2, '15'
+  #  make_rating beer1, '20'
+  #  visit ratings_path
+  #  expect(page).to have_content 'Number of ratings: 3'
+  #  expect(page).to have_content 'iso 3 10 Pekka1'
+  #  expect(page).to have_content 'Karhu 15 Pekka1'
+  #  expect(page).to have_content 'iso 3 20 Pekka1'
+  #end
   
   it "on user page, shows only user's ratings" do
     make_rating beer1, '10'

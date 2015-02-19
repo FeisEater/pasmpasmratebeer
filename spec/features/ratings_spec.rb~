@@ -68,7 +68,7 @@ describe "Rating" do
     make_rating beer1, '10'
     visit user_path(user)
     expect(page).to have_content 'Lager is his favorite style'
-    expect(page).to have_content 'cunt'
+    expect(page).to have_content 'Koff is his favorite brewery'
   end
 end
 
