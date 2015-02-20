@@ -9,7 +9,7 @@
 
 <% if current_user.admin %>
 <% label = @user.banned? ? "reactivate account" : "ban account" %>
-<%= link_to label, toggle_ban_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+<%= link_to label, toggle_ban_user_path(@user.id), method: :post, class: "btn btn-danger" %>
 <% end %>
 
 <p>
