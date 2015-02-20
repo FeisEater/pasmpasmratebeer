@@ -20,17 +20,11 @@ class User < ActiveRecord::Base
   end
   
   def favorite_style
-    return nil if ratings.empty?
-    styles = ratings.group_by {|r| r.beer.style}
-    styles = styles.map{|k,v| [k, average(v)]}
-    styles.sort_by {|k,v| v}.last[0]    #0 index gets the key, ie. style name
+    favorite :style
   end
   
   def favorite_brewery
-    return nil if ratings.empty?
-    breweries = ratings.group_by {|r| r.beer.brewery}
-    breweries = breweries.map{|k,v| [k, average(v)]}
-    breweries.sort_by {|k,v| v}.last[0]    #0 index gets the key, ie. style name
+    favorite :brewery
   end
   
   def self.most_active
@@ -39,6 +33,13 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def favorite(category)
+    return nil if ratings.empty?
+    items = ratings.group_by {|r| r.beer.send(category)}
+    items = items.map{|k,v| [k, average(v)]}
+    items.sort_by {|k,v| v}.last[0]    #0 index gets the key, ie. style name
+  end
   
   def average(a)
     a = a.map{|r| r.score}

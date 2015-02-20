@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_logged_in, only: [:toggle_ban]
 
   # GET /users
   # GET /users.json
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user == current_user && @user.update(user_params)
+      if user_params[:username].nil? && @user == current_user && @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -64,6 +65,15 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def toggle_ban
+    user = User.find(params[:id])
+    user.update_attribute :banned, (not user.banned)
+    
+    new_status = user.banned? ? "banned" : "unbanned"
+    
+    redirect_to :back, notice:"#{user.username} is now #{new_status}"
   end
 
   private

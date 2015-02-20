@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     breweries.sort_by {|k,v| v}.last[0]    #0 index gets the key, ie. style name
   end
   
+  def self.most_active
+    sorted_by_amount_of_ratings = User.all.sort_by{ |u| u.ratings.count }
+    sorted_by_amount_of_ratings.take 3
+  end
+  
   private
   
   def average(a)

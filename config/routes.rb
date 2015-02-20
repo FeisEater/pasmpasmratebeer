@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :beer_clubs
 
-  resources :users
+  resources :users do
+    post 'toggle_ban', on: :member
+  end
 
   resources :beers
 

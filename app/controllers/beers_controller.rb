@@ -2,7 +2,8 @@ class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :set_breweries_and_styles, only: [:new, :edit, :create, :update]
   before_action :ensure_that_signed_in, except: [:index, :show]
-  
+  before_action :admin_logged_in, only: [:destroy]
+
   def set_breweries_and_styles
     @breweries = Brewery.all
     @styles = Style.all

@@ -1,6 +1,7 @@
 class BeerClubsController < ApplicationController
   before_action :set_beer_club, only: [:show, :edit, :update, :destroy, :join, :quit]
   before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :admin_logged_in, only: [:destroy]
 
   # GET /beer_clubs
   # GET /beer_clubs.json

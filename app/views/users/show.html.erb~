@@ -2,7 +2,15 @@
 
 <h1>
   <%= @user.username %>
+  <% if @user.banned && current_user.admin %>
+    <span class="label label-info">account banned</span>
+  <% end %>
 </h1>
+
+<% if current_user.admin %>
+<% label = @user.banned? ? "reactivate account" : "ban account" %>
+<%= link_to label, toggle_ban_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+<% end %>
 
 <p>
   member of
@@ -41,8 +49,4 @@
 
 <br>
 
-<% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-default" %>
-  <%= link_to 'Destroy', @user, class: "btn btn-danger",method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
-
+<%= edit_and_destroy_buttons(@user) %>

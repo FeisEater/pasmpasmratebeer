@@ -2,7 +2,15 @@
 
 <h1>
   <%= @user.username %>
+  <% if @user.banned && current_user.admin %>
+    <span class="label label-info">account banned</span>
+  <% end %>
 </h1>
+
+<% if current_user.admin %>
+<% label = @user.banned? ? "reactivate account" : "ban account" %>
+<%= link_to label, toggle_ban_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% end %>
 
 <p>
   member of
