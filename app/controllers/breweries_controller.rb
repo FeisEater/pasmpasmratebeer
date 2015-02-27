@@ -1,13 +1,19 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :admin_logged_in, only: [:destroy]
 
   # GET /breweries
   # GET /breweries.json
   def index
-    @active_breweries = Brewery.active
-    @retired_breweries = Brewery.retired
+    order = params["order"] || "name"
+    asc = session[:asc]
+    @active_breweries = order_breweries(order, true, asc)
+    @retired_breweries = order_breweries(order, false, asc)
+    session[:asc] = !asc
+    #byebug
+    #@active_breweries = Brewery.active
+    #@retired_breweries = Brewery.retired
   end
 
   # GET /breweries/1
@@ -75,6 +81,9 @@ class BreweriesController < ApplicationController
     redirect_to :back, notice:"brewery activity status changed to #{new_status}"
   end
   
+  def list
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_brewery
@@ -86,4 +95,17 @@ class BreweriesController < ApplicationController
       params.require(:brewery).permit(:name, :year, :active)
     end
 
+    def order_breweries(order, active, asc)
+      if asc
+        case order
+          when 'name' then Brewery.order(:name).where(:active => active)
+          when 'year' then Brewery.order(:year).where(:active => active)
+        end
+      else
+        case order
+          when 'name' then Brewery.order(name: :desc).where(:active => active)
+          when 'year' then Brewery.order(year: :desc).where(:active => active)
+        end
+      end
+    end
 end

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :beer_clubs
 
-  resources :users
+  resources :users do
+    post 'toggle_ban', on: :member
+  end
 
   resources :beers
 
@@ -26,6 +28,10 @@ Rails.application.routes.draw do
   delete 'quit_club/:id', to: 'beer_clubs#quit', as: :quit_club
 
   post 'places', to:'places#search'
+
+  get 'beerlist', to:'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
+  get 'brewerylist', to:'brewery#list'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

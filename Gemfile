@@ -29,6 +29,7 @@ gem 'rb-readline'
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'httparty'
 gem 'bootstrap-sass'
+gem 'jquery-turbolinks'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -56,7 +57,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 1.3.2'
 
   gem 'rspec-rails', '~> 3.0'
 #  gem 'factory_girl_rails'
@@ -70,6 +71,8 @@ group :test do
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter'
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do
