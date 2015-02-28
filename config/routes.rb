@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   post 'join_club/:id', to: 'beer_clubs#join', as: :join_club
+  post 'confirm_memship/:user_id/:club_id', to: 'beer_clubs#confirm', as: :confirm_memship
   delete 'quit_club/:id', to: 'beer_clubs#quit', as: :quit_club
 
   post 'places', to:'places#search'
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
   get 'beerlist', to:'beers#list'
   get 'ngbeerlist', to:'beers#nglist'
   get 'brewerylist', to:'breweries#list'
+  
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,10 +1,21 @@
 class RatingsController < ApplicationController
+  #optimoinnissa ei käytetty monisäikeisyyttä
   def index
-    @ratings = Rating.recent
-    @most_active_users = User.most_active
-    @top_breweries = RatingAverage.top Brewery, 3
-    @top_beers = RatingAverage.top Beer, 3
-    @top_styles = RatingAverage.top Style, 3
+    @ratings = Rails.cache.fetch('recent ratings', expires_in: 10.minutes) do
+      Rating.recent
+    end
+    @most_active_users = Rails.cache.fetch('most active users', expires_in: 10.minutes) do
+      User.most_active
+    end
+    @top_breweries = Rails.cache.fetch('top breweries', expires_in: 10.minutes) do
+      RatingAverage.top Brewery, 3
+    end
+    @top_beers = Rails.cache.fetch('top beers', expires_in: 10.minutes) do
+      RatingAverage.top Beer, 3
+    end
+    @top_styles = Rails.cache.fetch('top styles', expires_in: 10.minutes) do
+      RatingAverage.top Style, 3
+    end
   end
 
   def new

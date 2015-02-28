@@ -2,19 +2,26 @@
 
 <h1>
   <%= @user.username %>
-  <% if @user.banned && current_user.admin %>
+  <% if @user.banned && current_user && current_user.admin %>
     <span class="label label-info">account banned</span>
   <% end %>
 </h1>
 
-<% if current_user.admin %>
+<% if current_user && current_user.admin %>
 <% label = @user.banned? ? "reactivate account" : "ban account" %>
 <%= link_to label, toggle_ban_user_path(@user.id), method: :post, class: "btn btn-danger" %>
 <% end %>
 
 <p>
   member of
-  <% @user.beer_clubs.each do |club| %>
+  <% @user.confirmed_memberships.each do |club| %>
+    <%= link_to club.name, club %>
+  <% end %>
+</p>
+
+<p>
+  applied membership to
+  <% @user.unconfirmed_memberships.beer_clubs.each do |club| %>
     <%= link_to club.name, club %>
   <% end %>
 </p>

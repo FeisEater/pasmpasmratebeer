@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   
   def favorite_beer
     return nil if ratings.empty?
-    ratings.order(score: :desc).limit(1).first.beer
+    ratings.sort_by{ |r| r.score }.last.beer
   end
   
   def favorite_style
@@ -28,8 +28,23 @@ class User < ActiveRecord::Base
   end
   
   def self.most_active
-    sorted_by_amount_of_ratings = User.all.sort_by{ |u| u.ratings.count }
+    sorted_by_amount_of_ratings = User.all.sort_by{ |u| u.ratings.count }.reverse
     sorted_by_amount_of_ratings.take 3
+  end
+  
+  def confirmed_memberships
+    mems = memberships.select{ |m| m.confirmed }
+    mems = mems.map{ |m| m.beer_club }
+    mems.reject{ |m| m.nil? }
+  end
+  def unconfirmed_memberships
+    mems = memberships.reject{ |m| m.confirmed }
+    mems = mems.map{ |m| m.beer_club }
+    mems.reject{ |m| m.nil? }
+  end
+  
+  def confirmed_member_of(club)
+    confirmed_memberships.include? club
   end
   
   private

@@ -2,12 +2,14 @@
 
 <h1>Listing Beers</h1>
 
+<% cache 'beerlist', skip_digest: true do %>
+
 <table class="table table-hover">
   <thead>
     <tr>
-      <th> <a href="#" id="name">Name</a> </th>
-      <th> <a href="#" id="style">Style</a> </th>
-      <th> <a href="#" id="brewery">Brewery</a> </th>
+      <th> <%= link_to 'Name', beers_path(order:"name") %> </th>
+      <th> <%= link_to 'Style', beers_path(order:"style") %> </th>
+      <th> <%= link_to 'Brewery', beers_path(order:"brewery") %> </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +26,8 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>
 
 <br>
 

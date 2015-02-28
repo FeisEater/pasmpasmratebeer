@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<% cache @brewery do %>
 
 <h2>
   <strong>Name:</strong>
@@ -32,5 +32,6 @@
   <% end %>
 </p>
 
+<% end %>
 
 <%= edit_and_destroy_buttons(@brewery) %>

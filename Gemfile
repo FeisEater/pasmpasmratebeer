@@ -30,6 +30,8 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'httparty'
 gem 'bootstrap-sass'
 gem 'jquery-turbolinks'
+gem 'rack-mini-profiler'
+gem 'omniauth-github'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

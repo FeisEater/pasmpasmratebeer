@@ -28,10 +28,10 @@ describe "Breweries page" do
     #end
 
     it "allows user to navigate to page of a Brewery" do
-      click_link "Schlenkerla"
+      click_link "Karjala"
 
-      expect(page).to have_content "Schlenkerla"
-      expect(page).to have_content "Established in 1899"
+      expect(page).to have_content "Karjala"
+      expect(page).to have_content "Established in 1898"
     end
 
   end

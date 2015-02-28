@@ -27,4 +27,15 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
   
+  def create_oauth
+    user = User.find_by username: env["omniauth.auth"].info.nickname
+    user = User.create(username: env["omniauth.auth"].info.nickname, password: "EnMäJaksanuK00data", password_confirmation: "EnMäJaksanuK00data", banned: false) if user.nil?
+    if user.banned
+      redirect_to :back, notice:'your account is banned, please contact admin'
+    else
+      session[:user_id] = user.id
+      redirect_to user, notice: "Welcome back!"
+    end
+  end
+  
 end

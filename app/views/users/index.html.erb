@@ -6,7 +6,10 @@
   <thead>
     <tr>
       <th>Username</th>
-      <th colspan="3"></th>
+      <th> rated beers </th>
+      <th> total ratings </th>
+      <th> favorite beer</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -14,6 +17,9 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
+        <td><%= user.beers.size %></td>
+        <td><%= user.ratings.size %></td>
+        <td><%= user.favorite_beer %></td>
         <% if current_user && current_user.admin && user.banned %>
         <td><span class="label label-info">account banned</span></td>
         <% end %>

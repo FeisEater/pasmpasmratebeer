@@ -17,8 +17,21 @@
 <h2>Members</h2>
 
 <ul class="list-group">
-  <% @beer_club.members.each do |m| %>
+  <% @beer_club.confirmed_members.each do |m| %>
     <li class="list-group-item"><%= link_to m.username, m %></li>
+  <% end %>
+</ul>
+
+<h2>Outstanding applications</h2>
+
+<ul class="list-group">
+  <% @beer_club.unconfirmed_members.each do |m| %>
+    <li class="list-group-item">
+      <%= link_to m.username, m %>
+      <% if current_user.confirmed_member_of @beer_club %>
+        <%= button_to('confirm', confirm_memship_path(m, @beer_club), method: :post, class: "btn btn-primary btn-xs") %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 

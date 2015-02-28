@@ -14,7 +14,14 @@
 
 <p>
   member of
-  <% @user.beer_clubs.each do |club| %>
+  <% @user.confirmed_memberships.each do |club| %>
+    <%= link_to club.name, club %>
+  <% end %>
+</p>
+
+<p>
+  applied membership to
+  <% @user.unconfirmed_memberships.each do |club| %>
     <%= link_to club.name, club %>
   <% end %>
 </p>
