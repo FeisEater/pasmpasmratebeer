@@ -1,5 +1,5 @@
 # pasmpasmratebeer
-Ruby on rails kurssin ratebeer
+Ratebeer app implemented as part of Ruby On Rails course.
 
 heroku linkki: https://pasmpasmratebeer.herokuapp.com
 
